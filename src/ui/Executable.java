@@ -1,9 +1,8 @@
 package ui;
 
-import model.Controller;
-
 import java.time.LocalDate;
 import java.util.Scanner;
+import model.Controller;
 
 public class Executable {
 
@@ -69,10 +68,12 @@ public class Executable {
     String serial = reader.nextLine();
     System.out.println("Digite el valor de consumo del dispositivo");
     double consumption = reader.nextDouble();
+    System.out.println("Digite la descripcion del dispositivo");
+    String description = reader.nextLine();
     System.out.println("Digite el piso donde se encuentra el dispositivo");
     int floor = reader.nextInt();
     reader.nextLine(); // Consume the newline character
-
+    control.addDevice(serial, consumption,description, floor);
   }
 
   public void registerEventForDevice() {
@@ -84,7 +85,7 @@ public class Executable {
     LocalDate date = LocalDate.parse(reader.nextLine(), java.time.format.DateTimeFormatter.ofPattern("dd/MM/yyyy"));
     System.out.println("Digite la cantidad de horas que el dispositivo estuvo encendido");
     double hours = reader.nextDouble();
-
+    control.registerEventForDevice(serial, date, hours);
   }
 
   public void updateDeviceConsumptionUnit() {
@@ -94,6 +95,7 @@ public class Executable {
     String serial = reader.nextLine();
     System.out.println("Digite el nuevo valor de consumo del dispositivo");
     double newConsumption = reader.nextDouble();
+    control.updateDeviceConsumptionUnit(serial, newConsumption);
   }
 
   public void showDeviceConsumption() {
@@ -101,6 +103,6 @@ public class Executable {
     System.out.println("Mostrar consumo total:");
     System.out.println("Digite el serial del dispositivo");
     String serial = reader.nextLine();
-
+    control.showDeviceConsumption(serial);
   }
 }
