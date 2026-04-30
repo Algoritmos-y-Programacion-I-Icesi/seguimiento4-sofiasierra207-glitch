@@ -49,4 +49,18 @@ public class Device {
             System.out.println("Failed to add event.");
         }
     }
+
+    public void updateDeviceConsumptionUnit(double newConsumption) {
+        this.consumption = newConsumption;
+    }
+
+    public void showDeviceConsumption() {
+        System.out.println("Device Serial: " + serial);
+        System.out.println("Device Consumption: " + consumption);
+        System.out.println("Device Description: " + description);
+    }
+
+    public void registerEvent(Event event) {
+        this.events.add(event);
+    }
 }

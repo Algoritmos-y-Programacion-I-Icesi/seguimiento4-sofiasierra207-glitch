@@ -34,6 +34,13 @@ public class Controller {
 
     }
 
+/**
+ * Registers an event for a device with the specified serial number.
+ *
+ * @param serial The serial number of the device.
+ * @param date The date of the event.
+ * @param hours The hours associated with the event.
+ */
     public void registerEventForDevice(String serial, java.time.LocalDate date, double hours) {
         Event event = new Event(date, hours);
         for (int f = 0; f < floors; f++) {
@@ -47,6 +54,12 @@ public class Controller {
         System.out.println("Device with serial " + serial + " not found.");
     }
 
+/**
+ * Updates the consumption unit for a device with the specified serial number.
+ *
+ * @param serial The serial number of the device.
+ * @param newConsumption The new consumption value for the device.
+ */
     public void updateDeviceConsumptionUnit(String serial, double newConsumption) {
         for (int f = 0; f < floors; f++) {
             for (int d = 0; d < devicesPerFloor; d++) {
@@ -59,6 +72,11 @@ public class Controller {
         System.out.println("Device with serial " + serial + " not found.");         
     }
 
+/**
+ * Displays the consumption information for a device with the specified serial number.
+ *
+ * @param serial The serial number of the device.
+ */
     public void showDeviceConsumption(String serial) {
         for (int f = 0; f < floors; f++) {
             for (int d = 0; d < devicesPerFloor; d++) {
