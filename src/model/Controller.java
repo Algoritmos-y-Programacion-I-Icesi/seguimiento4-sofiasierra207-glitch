@@ -22,28 +22,52 @@ public class Controller {
 
         for (int i = 0; i < devicesPerFloor; i++) {
             if (deviceMatrix[floor][i] != null && deviceMatrix[floor][i].getSerial().equals(serial)) {
-               System.out.println("Device with serial " + serial + " already exists.");
-            }else if (deviceMatrix[floor][i] == null) {
+                System.out.println("Device with serial " + serial + " already exists.");
+            } else if (deviceMatrix[floor][i] == null) {
                 deviceMatrix[floor][i] = new Device(serial, consumption, description);
-            
-            }else{
+
+            } else {
                 System.out.println("Failed to add device with serial " + serial);
             }
 
-        }       
-         
+        }
+
     }
 
     public void registerEventForDevice(String serial, java.time.LocalDate date, double hours) {
         Event event = new Event(date, hours);
-        for 
+        for (int f = 0; f < floors; f++) {
+            for (int d = 0; d < devicesPerFloor; d++) {
+                if (deviceMatrix[f][d] != null && deviceMatrix[f][d].getSerial().equals(serial)) {
+                    deviceMatrix[f][d].registerEvent(event);
+                    return;
+                }
+            }
+        }
+        System.out.println("Device with serial " + serial + " not found.");
     }
 
     public void updateDeviceConsumptionUnit(String serial, double newConsumption) {
-        deviceMatrix[floor][0].updateDeviceConsumptionUnit(serial, newConsumption);
+        for (int f = 0; f < floors; f++) {
+            for (int d = 0; d < devicesPerFloor; d++) {
+                if (deviceMatrix[f][d] != null && deviceMatrix[f][d].getSerial().equals(serial)) {
+                    deviceMatrix[f][d].updateDeviceConsumptionUnit(newConsumption);
+                    return;
+                }
+            }
+        }
+        System.out.println("Device with serial " + serial + " not found.");         
     }
 
     public void showDeviceConsumption(String serial) {
-        deviceMatrix[floor][0].showDeviceConsumption(serial);
+        for (int f = 0; f < floors; f++) {
+            for (int d = 0; d < devicesPerFloor; d++) {
+                if (deviceMatrix[f][d] != null && deviceMatrix[f][d].getSerial().equals(serial)) {
+                    deviceMatrix[f][d].showDeviceConsumption();
+                    return;
+                }
+            }
+        }
+        System.out.println("Device with serial " + serial + " not found.");
     }
 }
